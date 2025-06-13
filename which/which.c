@@ -8,6 +8,8 @@ char cur_path[256];
 char *current;
 char *which_prog;
 
+int search_path();
+
 main(int argc, char* argv[], char *env[])
 {
     char **e;
@@ -18,11 +20,18 @@ main(int argc, char* argv[], char *env[])
     }
     which_prog = argv[1];
 
+    strcpy(cur_path, ".");
+    if (0 == search_path())
+    {
+        return;
+    }
+
     for (e = env; e != NULL; e++)
     {
         if (is_path(*e)) {
             //puts(*e);
             search_paths(*e);
+            break;
         }
     }    
 }
