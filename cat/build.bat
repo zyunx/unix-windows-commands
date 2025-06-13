@@ -1,0 +1,1 @@
+tcc cat.c
